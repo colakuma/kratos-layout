@@ -38,16 +38,21 @@ config:
 api:
 	protoc --proto_path=./api \
 	       --proto_path=./third_party \
- 	       --go_out=paths=source_relative:./api \
- 	       --go-http_out=paths=source_relative:./api \
- 	       --go-grpc_out=paths=source_relative:./api \
-	       --openapi_out=fq_schema_naming=true,default_response=false:. \
+ 	       --go_out=paths=source_relative:gen/api/go \
+ 	       --go-http_out=paths=source_relative:gen/api/go \
+ 	       --go-grpc_out=paths=source_relative:gen/api/go \
+	       --openapi_out=fq_schema_naming=true,naming=proto,default_response=false:. \
 	       $(API_PROTO_FILES)
 
 .PHONY: build
 # build
 build:
 	mkdir -p bin/ && go build -ldflags "-X main.Version=$(VERSION)" -o ./bin/ ./...
+
+.PHONY: run
+# run
+run:
+	./bin/server -conf ./configs
 
 .PHONY: generate
 # generate

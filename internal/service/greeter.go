@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	v1 "github.com/go-kratos/kratos-layout/api/helloworld/v1"
+	v1 "github.com/go-kratos/kratos-layout/gen/api/go/server/v1"
 	"github.com/go-kratos/kratos-layout/internal/biz"
 )
 
@@ -25,5 +25,8 @@ func (s *GreeterService) SayHello(ctx context.Context, in *v1.HelloRequest) (*v1
 	if err != nil {
 		return nil, err
 	}
-	return &v1.HelloReply{Message: "Hello " + g.Hello}, nil
+	return &v1.HelloReply{
+		Message:  "Hello " + g.Hello,
+		UserName: g.Hello,
+	}, nil
 }

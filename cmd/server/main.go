@@ -4,17 +4,17 @@ import (
 	"flag"
 	"os"
 
-	"github.com/go-kratos/kratos-layout/internal/conf"
-
-	"github.com/go-kratos/kratos/v2"
+	kratos "github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/config"
 	"github.com/go-kratos/kratos/v2/config/file"
+	"github.com/go-kratos/kratos/v2/encoding/json"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware/tracing"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"github.com/go-kratos/kratos/v2/transport/http"
-
 	_ "go.uber.org/automaxprocs"
+
+	"github.com/go-kratos/kratos-layout/internal/conf"
 )
 
 // go build -ldflags "-X main.Version=x.y.z"
@@ -30,6 +30,7 @@ var (
 )
 
 func init() {
+	json.MarshalOptions.UseProtoNames = true
 	flag.StringVar(&flagconf, "conf", "../../configs", "config path, eg: -conf config.yaml")
 }
 

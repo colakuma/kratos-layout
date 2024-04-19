@@ -1,7 +1,7 @@
 package server
 
 import (
-	v1 "github.com/go-kratos/kratos-layout/api/helloworld/v1"
+	v1 "github.com/go-kratos/kratos-layout/gen/api/go/server/v1"
 	"github.com/go-kratos/kratos-layout/internal/conf"
 	"github.com/go-kratos/kratos-layout/internal/service"
 
@@ -12,7 +12,7 @@ import (
 
 // NewGRPCServer new a gRPC server.
 func NewGRPCServer(c *conf.Server, greeter *service.GreeterService, logger log.Logger) *grpc.Server {
-	var opts = []grpc.ServerOption{
+	opts := []grpc.ServerOption{
 		grpc.Middleware(
 			recovery.Recovery(),
 		),
